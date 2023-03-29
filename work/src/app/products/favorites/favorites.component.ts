@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
-import { ProductsService } from '../products.service';
+import { Component, OnInit } from '@angular/core';
 import { Product } from '../product';
-import { OnInit } from '@angular/core';
+import { ProductsService } from '../products.service';
 
 @Component({
   selector: 'app-favorites',
