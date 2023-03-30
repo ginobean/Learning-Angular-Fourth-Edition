@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProductsService } from '../products.service';
+import { Product } from '../product';
 
 @Component({
   selector: 'app-product-view',
@@ -7,15 +8,12 @@ import { ProductsService } from '../products.service';
   styleUrls: ['./product-view.component.css'],
 })
 export class ProductViewComponent implements OnInit {
-  @Input() id = -1;
-  name: string = '';
+  @Input() product: Product | undefined;
 
-  constructor(private productsService: ProductsService) {}
+
+  constructor() {}
 
   ngOnInit(): void {
-    const product = this.productsService.getProduct(this.id);
-    if (product) {
-      this.name = product.name;
-    }
+
   }
 }
