@@ -6,6 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Observable, Subscription, fromEvent } from 'rxjs';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-key-logger',
@@ -22,7 +23,9 @@ export class KeyLoggerComponent implements OnInit, OnDestroy {
       this.input?.nativeElement,
       'keyup'
     );
-    this.subscription = logger$.subscribe((evt) => (this.keys += evt.key));
+    this.subscription = logger$
+      .pipe(tap((evt) => console.log('received key = ' + evt.key)))
+      .subscribe((evt) => (this.keys += evt.key));
   }
 
   ngOnDestroy(): void {
