@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { SortPipe } from '../pipes/sort.pipe';
+import { SortProductsPipe } from '../pipes/sort-products.pipe';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductHostDirective } from './product-host.directive';
@@ -11,7 +11,7 @@ import { ProductViewComponent } from './product-view/product-view.component';
   declarations: [
     ProductListComponent,
     ProductDetailComponent,
-    SortPipe,
+    SortProductsPipe,
     ProductHostDirective,
     FavoritesComponent,
     ProductViewComponent,
