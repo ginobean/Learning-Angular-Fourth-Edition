@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductListComponent } from './product-list/product-list.component';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { SortPipe } from './sort.pipe';
-import { ProductHostDirective } from './product-host.directive';
+import { NgModule } from '@angular/core';
+import { SortPipe } from '../pipes/sort.pipe';
 import { FavoritesComponent } from './favorites/favorites.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ProductHostDirective } from './product-host.directive';
+import { ProductListComponent } from './product-list/product-list.component';
 import { ProductViewComponent } from './product-view/product-view.component';
 
 @NgModule({
