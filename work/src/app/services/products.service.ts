@@ -17,24 +17,6 @@ export class ProductsService {
 
   constructor(private httpClient: HttpClient) {}
 
-  private products = [
-    {
-      id: 1,
-      name: 'Webcam',
-      price: 100,
-    },
-    {
-      id: 2,
-      name: 'Microphone',
-      price: 200,
-    },
-    {
-      id: 3,
-      name: 'Wireless Keyboard',
-      price: 85,
-    },
-  ];
-
   getProducts(): Observable<Product[]> {
     return this.httpClient.get<ProductDTO[]>(this.productsUrl).pipe(
       map((products) =>
