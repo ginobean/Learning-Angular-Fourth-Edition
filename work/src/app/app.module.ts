@@ -6,6 +6,7 @@ import { CopyrightDirective } from './directives/copyright.directive';
 import { NumericDirective } from './directives/numeric.directive';
 import { PermissionDirective } from './directives/permission.directive';
 import { ProductsModule } from './products/products.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -13,9 +14,8 @@ import { ProductsModule } from './products/products.module';
     CopyrightDirective,
     NumericDirective,
     PermissionDirective,
-    // SortProductsPipe,
   ],
-  imports: [BrowserModule, ProductsModule],
+  imports: [BrowserModule, ProductsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })
