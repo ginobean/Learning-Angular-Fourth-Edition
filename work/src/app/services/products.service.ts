@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../products/product';
-import { Observable, of, map, switchMap, from } from 'rxjs';
+import { Observable, of, map, switchMap, from, filter } from 'rxjs';
+import { take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -31,13 +32,10 @@ export class ProductsService {
   }
 
   getProduct(id: number): Observable<Product> {
-    // TODO: filter result of switchMap, to only include those product(s) that match on id.
     return this.getProducts().pipe(
-      switchMap((listOfProducts) => from(listOfProducts))
+      switchMap((listOfProducts) => from(listOfProducts)),
+      filter((p) => p.id === id),
+      take(1)
     );
   }
-
-  // return this.getProducts().pipe(
-  //   switchMap((listOfProducts) => of(listOfProducts.find((p) => p.id === id)))
-  // );
 }
