@@ -9,11 +9,11 @@ import { ProductsService } from '../services/products.service';
   styleUrls: ['./favorites.component.css'],
 })
 export class FavoritesComponent implements OnInit {
-  products$: Observable<Product[]> | undefined;
+  productsStream: Observable<Product[]> | undefined;
 
   constructor(private productsService: ProductsService) {}
 
   ngOnInit(): void {
-    this.products$ = this.productsService.getProducts();
+    this.productsStream = this.productsService.getProducts();
   }
 }
