@@ -1,13 +1,19 @@
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { Product } from '../product';
 
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
-  styleUrls: ['./product-detail.component.css']
+  styleUrls: ['./product-detail.component.css'],
 })
 export class ProductDetailComponent implements OnChanges {
-
   @Input() product: Product | undefined;
   @Output() bought = new EventEmitter();
 
@@ -16,12 +22,11 @@ export class ProductDetailComponent implements OnChanges {
     if (!product.isFirstChange()) {
       const oldValue = product.previousValue.name;
       const newValue = product.currentValue.name;
-      console.log(`Product changed from ${oldValue} to ${newValue}`);
+      console.log(`Product changed from ${oldValue} to ${newValue}`);
     }
   }
 
   buy() {
     this.bought.emit();
   }
-
 }

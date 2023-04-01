@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Product } from '../products/product';
-import { Observable, take, of, map, switchMap, from, filter } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, filter, from, map, switchMap, take } from 'rxjs';
+import { Product } from '../products/product';
 
 interface ProductDTO {
   id: number;
@@ -37,5 +37,22 @@ export class ProductsService {
       filter((p) => p.id === id),
       take(1)
     );
+  }
+
+  convertToProduct = (product: ProductDTO) => {
+    return {
+      id: product.id,
+      name: product.title,
+      price: product.price,
+    };
+  };
+
+  addProduct(name: string, price: number): Observable<Product> {
+    return this.httpClient
+      .post<ProductDTO>(this.productsUrl, {
+        title: name,
+        price: price,
+      })
+      .pipe(map((dto) => this.convertToProduct(dto)));
   }
 }
