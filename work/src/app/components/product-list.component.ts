@@ -31,4 +31,8 @@ export class ProductListComponent implements AfterViewInit, OnInit {
   onBuy() {
     window.alert(`You just bought ${this.selectedProduct?.name}!`);
   }
+
+  showAdded(event: Product) {
+    console.log('added ' + JSON.stringify(event));
+  }
 }
