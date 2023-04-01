@@ -1,5 +1,5 @@
 import { Directive, OnInit, ViewContainerRef } from '@angular/core';
-import { ProductDetailComponent } from '../products/product-detail/product-detail.component';
+import { ProductDetailComponent } from '../components/product-detail.component';
 
 @Directive({
   selector: '[appProductHost]',
