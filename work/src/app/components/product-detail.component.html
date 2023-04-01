@@ -1,8 +1,13 @@
-<div *ngIf="product">
+<div *ngIf="currentProduct">
   <h2>Product Details</h2>
-  <h3>{{ product.name }}</h3>
-  <span>{{ product.price | currency : "USD" }}</span>
-  <div [ngSwitch]="product.name">
+  <h3>{{ currentProduct.name }}</h3>
+  <span>{{ currentProduct.price | currency : "USD" }}</span>
+
+  <input placeholder="New price" #price />
+  <button (click)="changePrice(currentProduct, price.valueAsNumber)">
+    Change
+  </button>
+  <div [ngSwitch]="currentProduct.name">
     <p *ngSwitchCase="'Webcam'">Product is used for video</p>
     <p *ngSwitchCase="'Microphone'">Product is used for audio</p>
     <p *ngSwitchDefault>Product is for general use</p>

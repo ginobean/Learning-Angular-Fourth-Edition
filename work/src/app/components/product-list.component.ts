@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Product } from '../datatypes/product';
 import { ProductsService } from '../services/products.service';
 import { ProductDetailComponent } from './product-detail.component';
@@ -10,26 +10,24 @@ import { ProductDetailComponent } from './product-detail.component';
   styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent implements AfterViewInit, OnInit {
-  selectedProduct: Product | undefined;
+  currentProduct: Product | undefined;
+  selectedProductStream: Subject<Product> = new Subject<Product>();
   @ViewChild(ProductDetailComponent) productDetail:
     | ProductDetailComponent
     | undefined;
-  products$: Observable<Product[]> | undefined;
+  productsStream: Observable<Product[]> | undefined;
 
   constructor(private productsService: ProductsService) {}
 
-  ngAfterViewInit(): void {
-    if (this.productDetail) {
-      console.log(this.productDetail.product);
-    }
-  }
+  ngAfterViewInit(): void {}
 
   ngOnInit(): void {
-    this.products$ = this.productsService.getProducts();
+    this.productsStream = this.productsService.getProducts();
+    this.selectedProductStream.subscribe((p) => (this.currentProduct = p));
   }
 
   onBuy() {
-    window.alert(`You just bought ${this.selectedProduct?.name}!`);
+    window.alert(`You just bought ${this.currentProduct?.name}!`);
   }
 
   showAdded(event: Product) {

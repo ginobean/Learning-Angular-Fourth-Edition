@@ -1,24 +1,24 @@
 <h2>Product List</h2>
 <ul>
   <li
-    *ngFor="let product of (products$ | async)! | sortProducts"
-    (click)="selectedProduct = product"
+    *ngFor="let product of (productsStream | async)! | sortProducts"
+    (click)="selectedProductStream.next(product)"
   >
     <app-product-view [product]="product"></app-product-view>
     {{ product.name }}
   </li>
 </ul>
+app product detail is here:
 <app-product-detail
-  *ngIf="selectedProduct; else noProduct"
-  [product]="selectedProduct"
+  [productStream]="selectedProductStream"
   (bought)="onBuy()"
->
-</app-product-detail>
-<ng-template #noProduct>
+></app-product-detail>
+
+<div *ngIf="!currentProduct">
   <p>No product selected!</p>
-</ng-template>
+</div>
+
 <h3>Offers</h3>
-<ng-template appProductHost></ng-template>
 
 <h2>Favorites!</h2>
 <app-favorites></app-favorites>

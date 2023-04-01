@@ -55,4 +55,8 @@ export class ProductsService {
       })
       .pipe(map((dto) => this.convertToProduct(dto)));
   }
+
+  updateProduct(id: number, price: number): Observable<void> {
+    return this.httpClient.patch<void>(`${this.productsUrl}/${id}`, { price });
+  }
 }
