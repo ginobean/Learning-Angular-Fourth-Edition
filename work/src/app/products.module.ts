@@ -6,6 +6,7 @@ import { ProductListComponent } from './components/product-list.component';
 import { ProductViewComponent } from './components/product-view.component';
 import { ProductHostDirective } from './directives/product-host.directive';
 import { SortProductsPipe } from './pipes/sort-products.pipe';
+import { ProductCreateComponent } from './components/product-create.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { SortProductsPipe } from './pipes/sort-products.pipe';
     ProductHostDirective,
     FavoritesComponent,
     ProductViewComponent,
+    ProductCreateComponent,
   ],
   imports: [CommonModule],
   exports: [ProductListComponent],
