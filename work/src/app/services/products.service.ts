@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, filter, from, map, switchMap, take } from 'rxjs';
-import { Product } from '../product';
+import { Product } from '../datatypes/product';
 
 interface ProductDTO {
   id: number;

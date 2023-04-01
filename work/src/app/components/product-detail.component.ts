@@ -6,7 +6,7 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { Product } from '../product';
+import { Product } from '../datatypes/product';
 
 @Component({
   selector: 'app-product-detail',

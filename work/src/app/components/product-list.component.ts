@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Product } from '../product';
+import { Product } from '../datatypes/product';
 import { ProductsService } from '../services/products.service';
 import { ProductDetailComponent } from './product-detail.component';
 
