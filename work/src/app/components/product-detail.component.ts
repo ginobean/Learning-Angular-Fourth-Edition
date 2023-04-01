@@ -36,8 +36,6 @@ export class ProductDetailComponent implements OnInit {
         }
       });
     }
-
-    console.log('product-detail priceElement = ' + this.priceElement);
   }
 
   changePrice(product: Product, price: number) {
