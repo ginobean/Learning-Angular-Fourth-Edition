@@ -17,8 +17,7 @@ import { ProductsService } from '../services/products.service';
   styleUrls: ['./product-detail.component.css'],
 })
 export class ProductDetailComponent implements OnInit {
-  @Input()
-  productStream: Subject<Product> | undefined;
+  @Input() productStream: Subject<Product> | undefined;
   @Output() bought = new EventEmitter();
   @ViewChild('price', { static: false }) priceElement: ElementRef | undefined;
 
@@ -28,7 +27,7 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.productStream) {
-      this.productStream?.subscribe((p) => {
+      this.productStream!.subscribe((p) => {
         this.currentProduct = p;
         console.log('updated current product to ' + this.currentProduct?.name);
         if (this.priceElement) {
