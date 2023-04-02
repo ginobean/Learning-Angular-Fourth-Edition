@@ -1,0 +1,5 @@
+<p>auth works!</p>
+<button [hidden]="authService.isLoggedIn" (click)="doLogin()">Login</button>
+<button [hidden]="!authService.isLoggedIn" (click)="authService.logout()">
+  Logout
+</button>
