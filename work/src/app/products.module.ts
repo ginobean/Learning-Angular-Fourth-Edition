@@ -6,6 +6,8 @@ import { ProductDetailComponent } from './components/product-detail.component';
 import { ProductListComponent } from './components/product-list.component';
 import { ProductViewComponent } from './components/product-view.component';
 import { SortProductsPipe } from './pipes/sort-products.pipe';
+import { CartComponent } from './components/cart.component';
+import { ProductsComponent } from './components/products.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,8 @@ import { SortProductsPipe } from './pipes/sort-products.pipe';
     FavoritesComponent,
     ProductViewComponent,
     ProductCreateComponent,
+    CartComponent,
+    ProductsComponent,
   ],
   imports: [CommonModule],
   exports: [ProductListComponent],

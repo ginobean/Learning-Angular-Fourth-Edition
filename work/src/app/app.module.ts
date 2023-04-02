@@ -10,6 +10,7 @@ import { ProductsModule } from './products.module';
 import { AuthModule } from './auth.module';
 import { AuthComponent } from './components/auth.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     NumericDirective,
     PermissionDirective,
   ],
-  imports: [BrowserModule, ProductsModule, HttpClientModule, AuthModule],
+  imports: [BrowserModule, ProductsModule, HttpClientModule, AuthModule, AppRoutingModule],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
