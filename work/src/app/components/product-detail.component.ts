@@ -17,7 +17,7 @@ import { ProductsService } from '../services/products.service';
   styleUrls: ['./product-detail.component.css'],
 })
 export class ProductDetailComponent implements OnInit {
-  @Input() productStream: Subject<Product> | undefined;
+  @Input() product$: Subject<Product> | undefined;
   @Output() bought = new EventEmitter();
   @ViewChild('price', { static: false }) priceElement: ElementRef | undefined;
 
@@ -26,8 +26,8 @@ export class ProductDetailComponent implements OnInit {
   constructor(private productsService: ProductsService) {}
 
   ngOnInit(): void {
-    if (this.productStream) {
-      this.productStream!.subscribe((p) => {
+    if (this.product$) {
+      this.product$!.subscribe((p) => {
         this.currentProduct = p;
         console.log('updated current product to ' + this.currentProduct?.name);
         if (this.priceElement) {
@@ -39,7 +39,7 @@ export class ProductDetailComponent implements OnInit {
 
   changePrice(product: Product, price: number) {
     this.productsService.updateProduct(product.id, price).subscribe(() => {
-      alert(`The price of ${product.name} was changed!`);
+      alert(`The price of ${product.name} was changed to: ${price}`);
     });
   }
 

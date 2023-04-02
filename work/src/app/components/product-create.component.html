@@ -6,8 +6,10 @@
 </div>
 <div>
   <label for="price">Price</label>
-  <input id="price" #price />
+  <input type="number" id="price" #price />
 </div>
 <div>
-  <button (click)="createProduct(name.value, price.value)">Create</button>
+  <button (click)="createProduct(name.value, price.valueAsNumber)">
+    Create
+  </button>
 </div>

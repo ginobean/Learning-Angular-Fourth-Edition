@@ -1,8 +1,8 @@
 <h2>Product List</h2>
 <ul>
   <li
-    *ngFor="let product of (productsStream | async)! | sortProducts"
-    (click)="selectedProductStream.next(product)"
+    *ngFor="let product of (products$ | async)! | sortProducts"
+    (click)="selectedProduct$.next(product)"
   >
     <app-product-view [product]="product"></app-product-view>
     {{ product.name }}
@@ -10,7 +10,7 @@
 </ul>
 app product detail is here:
 <app-product-detail
-  [productStream]="selectedProductStream"
+  [product$]="selectedProduct$"
   (bought)="onBuy()"
 ></app-product-detail>
 

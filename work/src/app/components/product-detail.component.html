@@ -3,7 +3,7 @@
   <h3>{{ currentProduct.name }}</h3>
   <span>{{ currentProduct.price | currency : "USD" }}</span>
 
-  <input placeholder="New price" #price />
+  <input type="number" placeholder="New price" #price />
   <button (click)="changePrice(currentProduct, price.valueAsNumber)">
     Change
   </button>

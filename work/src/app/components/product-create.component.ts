@@ -1,5 +1,10 @@
-import { Component } from '@angular/core';
-import { EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { Product } from '../datatypes/product';
 import { ProductsService } from '../services/products.service';
 
@@ -13,12 +18,11 @@ export class ProductCreateComponent {
 
   constructor(private productsService: ProductsService) {}
 
-  createProduct(name: string, price: string) {
+  createProduct(name: string, price: number) {
     console.log(' component createProduct invoked!');
-    this.productsService
-      .addProduct(name, Number(price))
-      .subscribe((product) => {
-        this.added.emit(product);
-      });
+    alert(`created product ${name} : ${price}`);
+    this.productsService.addProduct(name, price).subscribe((product) => {
+      this.added.emit(product);
+    });
   }
 }

@@ -11,19 +11,19 @@ import { ProductDetailComponent } from './product-detail.component';
 })
 export class ProductListComponent implements AfterViewInit, OnInit {
   currentProduct: Product | undefined;
-  selectedProductStream: Subject<Product> = new Subject<Product>();
+  selectedProduct$: Subject<Product> = new Subject<Product>();
   @ViewChild(ProductDetailComponent) productDetail:
     | ProductDetailComponent
     | undefined;
-  productsStream: Observable<Product[]> | undefined;
+  products$: Observable<Product[]> | undefined;
 
   constructor(private productsService: ProductsService) {}
 
   ngAfterViewInit(): void {}
 
   ngOnInit(): void {
-    this.productsStream = this.productsService.getProducts();
-    this.selectedProductStream.subscribe((p) => (this.currentProduct = p));
+    this.products$ = this.productsService.getProducts();
+    this.selectedProduct$.subscribe((p) => (this.currentProduct = p));
   }
 
   onBuy() {
