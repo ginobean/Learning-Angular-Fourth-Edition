@@ -7,15 +7,18 @@ import { CopyrightDirective } from './directives/copyright.directive';
 import { NumericDirective } from './directives/numeric.directive';
 import { PermissionDirective } from './directives/permission.directive';
 import { ProductsModule } from './products.module';
+import { AuthModule } from './auth.module';
+import { AuthComponent } from './components/auth.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AuthComponent,
     CopyrightDirective,
     NumericDirective,
     PermissionDirective,
   ],
-  imports: [BrowserModule, ProductsModule, HttpClientModule],
+  imports: [BrowserModule, ProductsModule, HttpClientModule, AuthModule],
   providers: [],
   bootstrap: [AppComponent],
 })

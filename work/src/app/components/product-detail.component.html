@@ -12,5 +12,5 @@
     <p *ngSwitchCase="'Microphone'">Product is used for audio</p>
     <p *ngSwitchDefault>Product is for general use</p>
   </div>
-  <button (click)="buy()">Buy Now</button>
+  <button *ngIf="authService.isLoggedIn" (click)="buy()">Buy Now</button>
 </div>

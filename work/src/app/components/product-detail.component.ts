@@ -10,6 +10,7 @@ import {
 import { Subject } from 'rxjs';
 import { Product } from '../datatypes/product';
 import { ProductsService } from '../services/products.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -23,7 +24,10 @@ export class ProductDetailComponent implements OnInit {
 
   currentProduct: Product | undefined;
 
-  constructor(private productsService: ProductsService) {}
+  constructor(
+    private productsService: ProductsService,
+    public authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     if (this.product$) {
