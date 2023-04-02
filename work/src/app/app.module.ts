@@ -11,6 +11,7 @@ import { AuthModule } from './auth.module';
 import { AuthComponent } from './components/auth.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AppRoutingModule } from './app-routing.module';
+import { PageNotFoundComponent } from './components/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { AppRoutingModule } from './app-routing.module';
     CopyrightDirective,
     NumericDirective,
     PermissionDirective,
+    PageNotFoundComponent,
   ],
   imports: [BrowserModule, ProductsModule, HttpClientModule, AuthModule, AppRoutingModule],
   providers: [
