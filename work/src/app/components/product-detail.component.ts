@@ -38,7 +38,10 @@ export class ProductDetailComponent implements OnInit {
       })
     );
 
-    this.product$.subscribe((p) => (this.currentProduct = p));
+    this.product$.subscribe((p) => {
+      this.currentProduct = p;
+      console.log('new product detail = ' + p.name);
+    });
   }
 
   changePrice(product: Product, price: number) {

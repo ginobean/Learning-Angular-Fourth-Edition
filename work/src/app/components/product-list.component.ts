@@ -22,10 +22,11 @@ export class ProductListComponent implements AfterViewInit, OnInit {
   ngAfterViewInit(): void {}
 
   ngOnInit(): void {
+    console.log('product list :: ngOnInit()');
     this.products$ = this.productsService.getProducts();
     this.selectedProduct$.subscribe((p) => {
       this.currentProduct = p;
-      console.log('new current product = ' + p.name);
+      console.log('prod list new selected product = ' + p.name);
     });
   }
 
