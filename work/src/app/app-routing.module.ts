@@ -22,7 +22,10 @@ const routes: Routes = [
   },
   {
     path: 'about',
-    loadChildren: () => import('./about.module').then((m) => m.AboutModule),
+    loadComponent: () =>
+      import('./components/about-info.component').then(
+        (c) => c.AboutInfoComponent
+      ),
     canMatch: [authGuard],
   },
   { path: '**', component: PageNotFoundComponent },
