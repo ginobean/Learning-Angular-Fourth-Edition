@@ -11,7 +11,7 @@ import { ProductDetailComponent } from './product-detail.component';
 })
 export class ProductListComponent implements AfterViewInit, OnInit {
   currentProduct: Product | undefined;
-  selectedProduct$: Subject<Product> = new Subject<Product>();
+  selectedProduct$ = new Subject<Product>();
   @ViewChild(ProductDetailComponent) productDetail:
     | ProductDetailComponent
     | undefined;
@@ -22,7 +22,6 @@ export class ProductListComponent implements AfterViewInit, OnInit {
   ngAfterViewInit(): void {}
 
   ngOnInit(): void {
-    console.log('product list :: ngOnInit()');
     this.products$ = this.productsService.getProducts();
     this.selectedProduct$.subscribe((p) => {
       this.currentProduct = p;
