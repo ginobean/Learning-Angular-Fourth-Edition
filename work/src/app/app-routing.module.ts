@@ -20,6 +20,10 @@ const routes: Routes = [
     canActivate: [authGuard],
     canDeactivate: [checkoutGuard],
   },
+  {
+    path: 'about',
+    loadChildren: () => import('./about.module').then((m) => m.AboutModule),
+  },
   { path: '**', component: PageNotFoundComponent },
 ];
 
