@@ -1,4 +1,5 @@
 <div *ngIf="currentProduct">
+  <hr />
   <h2>Product Details</h2>
   <h3>{{ currentProduct.name }}</h3>
   <span>{{ currentProduct.price | currency : "USD" }}</span>
@@ -13,4 +14,5 @@
     <p *ngSwitchDefault>Product is for general use</p>
   </div>
   <button *ngIf="authService.isLoggedIn" (click)="buy()">Buy Now</button>
+  <hr />
 </div>

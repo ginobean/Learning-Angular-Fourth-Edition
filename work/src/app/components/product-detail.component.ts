@@ -2,16 +2,15 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  Input,
   OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
-import { Observable, Subject, switchMap } from 'rxjs';
-import { Product } from '../datatypes/product';
-import { ProductsService } from '../services/products.service';
-import { AuthService } from '../services/auth.service';
 import { ActivatedRoute } from '@angular/router';
+import { Observable, switchMap } from 'rxjs';
+import { Product } from '../datatypes/product';
+import { AuthService } from '../services/auth.service';
+import { ProductsService } from '../services/products.service';
 
 @Component({
   selector: 'app-product-detail',

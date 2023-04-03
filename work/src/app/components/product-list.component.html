@@ -4,14 +4,17 @@
     *ngFor="let product of (products$ | async)! | sortProducts"
     (click)="selectedProduct$.next(product)"
   >
-    <a [routerLink]="['/products', product.id]">{{ product.name }}</a>
+    <a [routerLink]="['./', product.id]">{{ product.name }}</a>
     {{ product.name }}
   </li>
 </ul>
 
-<div *ngIf="!currentProduct">
+<div *ngIf="!currentProduct; else showProduct">
   <p>No product selected!</p>
 </div>
+<ng-template #showProduct>
+  <router-outlet></router-outlet>
+</ng-template>
 
 <h3>Offers</h3>
 
