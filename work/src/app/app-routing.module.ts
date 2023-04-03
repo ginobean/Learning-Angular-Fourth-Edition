@@ -4,6 +4,8 @@ import { CartComponent } from './components/cart.component';
 import { PageNotFoundComponent } from './components/page-not-found.component';
 import { ProductDetailComponent } from './components/product-detail.component';
 import { ProductListComponent } from './components/product-list.component';
+import { authGuard } from './guards/auth.guard';
+import { checkoutGuard } from './guards/checkout.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/products', pathMatch: 'full' },
@@ -12,7 +14,12 @@ const routes: Routes = [
     component: ProductListComponent,
     children: [{ path: ':id', component: ProductDetailComponent }],
   },
-  { path: 'cart', component: CartComponent },
+  {
+    path: 'cart',
+    component: CartComponent,
+    canActivate: [authGuard],
+    canDeactivate: [checkoutGuard],
+  },
   { path: '**', component: PageNotFoundComponent },
 ];
 
