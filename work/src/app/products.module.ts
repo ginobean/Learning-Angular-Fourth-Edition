@@ -8,6 +8,7 @@ import { ProductViewComponent } from './components/product-view.component';
 import { SortProductsPipe } from './pipes/sort-products.pipe';
 import { CartComponent } from './components/cart.component';
 import { ProductsComponent } from './components/products.component';
+import { Router, RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { ProductsComponent } from './components/products.component';
     CartComponent,
     ProductsComponent,
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   exports: [ProductListComponent],
 })
 export class ProductsModule {}

@@ -7,10 +7,11 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject, switchMap } from 'rxjs';
 import { Product } from '../datatypes/product';
 import { ProductsService } from '../services/products.service';
 import { AuthService } from '../services/auth.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-detail',
@@ -18,7 +19,7 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./product-detail.component.css'],
 })
 export class ProductDetailComponent implements OnInit {
-  @Input() product$: Subject<Product> | undefined;
+  product$: Observable<Product> | undefined;
   @Output() bought = new EventEmitter();
   @ViewChild('price', { static: false }) priceElement: ElementRef | undefined;
 
@@ -26,19 +27,19 @@ export class ProductDetailComponent implements OnInit {
 
   constructor(
     private productsService: ProductsService,
-    public authService: AuthService
+    public authService: AuthService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    if (this.product$) {
-      this.product$!.subscribe((p) => {
-        this.currentProduct = p;
-        console.log('updated current product to ' + this.currentProduct?.name);
-        if (this.priceElement) {
-          this.priceElement!.nativeElement.value = null;
-        }
-      });
-    }
+    console.log('product details component ngOnInit()');
+    this.product$ = this.route.paramMap.pipe(
+      switchMap((params) => {
+        return this.productsService.getProduct(Number(params.get('id')));
+      })
+    );
+
+    this.product$.subscribe((p) => (this.currentProduct = p));
   }
 
   changePrice(product: Product, price: number) {
