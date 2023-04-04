@@ -16,22 +16,15 @@ export class ProductCreateComponent {
     private formBuilder: FormBuilder
   ) {}
 
-  productForm:
-    | FormGroup<{
-        name: FormControl<string>;
-        price: FormControl<number | undefined>;
-      }>
-    | undefined;
-
-  private buildForm() {
-    this.productForm = this.formBuilder.nonNullable.group({
-      name: this.formBuilder.nonNullable.control(''),
-      price: this.formBuilder.nonNullable.control<number | undefined>(
-        undefined,
-        {}
-      ),
-    });
-  }
+  productForm = this.formBuilder.group({
+    name: [''],
+    price: [''],
+    info: this.formBuilder.group({
+      category: [''],
+      description: [''],
+      image: [''],
+    }),
+  });
 
   // productForm = new FormGroup({
   //   name: new FormControl('', { nonNullable: true }),
@@ -57,7 +50,7 @@ export class ProductCreateComponent {
     let msg = `created product: ${this.name.value}, price: ${this.price.value}`;
     alert(msg);
     this.productsService
-      .addProduct(this.name.value, Number(this.price.value))
+      .addProduct(this.name.value!, Number(this.price.value))
       .subscribe((product) => {
         this.productForm!.reset();
         this.added.emit(product);
