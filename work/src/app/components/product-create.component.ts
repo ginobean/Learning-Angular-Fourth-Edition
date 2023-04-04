@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Product } from '../datatypes/product';
 import { ProductsService } from '../services/products.service';
 
@@ -11,26 +11,46 @@ import { ProductsService } from '../services/products.service';
 export class ProductCreateComponent {
   @Output() added = new EventEmitter<Product>();
 
-  productForm = new FormGroup({
-    name: new FormControl('', { nonNullable: true }),
-    price: new FormControl<number | undefined>(undefined, {
-      nonNullable: true,
-    }),
-    info: new FormGroup({
-      category: new FormControl(''),
-      description: new FormControl(''),
-      image: new FormControl(''),
-    }),
-  });
+  constructor(
+    private productsService: ProductsService,
+    private formBuilder: FormBuilder
+  ) {}
+
+  productForm:
+    | FormGroup<{
+        name: FormControl<string>;
+        price: FormControl<number | undefined>;
+      }>
+    | undefined;
+
+  private buildForm() {
+    this.productForm = this.formBuilder.nonNullable.group({
+      name: this.formBuilder.nonNullable.control(''),
+      price: this.formBuilder.nonNullable.control<number | undefined>(
+        undefined,
+        {}
+      ),
+    });
+  }
+
+  // productForm = new FormGroup({
+  //   name: new FormControl('', { nonNullable: true }),
+  //   price: new FormControl<number | undefined>(undefined, {
+  //     nonNullable: true,
+  //   }),
+  //   info: new FormGroup({
+  //     category: new FormControl(''),
+  //     description: new FormControl(''),
+  //     image: new FormControl(''),
+  //   }),
+  // });
 
   get name() {
-    return this.productForm.controls.name;
+    return this.productForm!.controls.name;
   }
   get price() {
-    return this.productForm.controls.price;
+    return this.productForm!.controls.price;
   }
-
-  constructor(private productsService: ProductsService) {}
 
   createProduct() {
     console.log(' component createProduct invoked!');
@@ -39,7 +59,7 @@ export class ProductCreateComponent {
     this.productsService
       .addProduct(this.name.value, Number(this.price.value))
       .subscribe((product) => {
-        this.productForm.reset();
+        this.productForm!.reset();
         this.added.emit(product);
       });
   }
