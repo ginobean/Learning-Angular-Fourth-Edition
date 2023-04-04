@@ -27,7 +27,10 @@ export class FormsArrayExampleComponent {
     this.lessons.push(lessonForm);
   }
 
-  deleteLesson(i: number) {
-    this.lessons.removeAt(i);
+  deleteLesson() {
+    const sz = this.lessons.length;
+    if (sz > 0) {
+      this.lessons.removeAt(sz - 1);
+    }
   }
 }
