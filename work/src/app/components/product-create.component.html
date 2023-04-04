@@ -25,4 +25,8 @@
 
     <button type="submit" [disabled]="!productForm.valid">Create</button>
   </div>
+  <div>
+    <p>real time data: {{ productForm.value | json }}</p>
+    <p>form status is: {{ productForm.status }}</p>
+  </div>
 </form>
