@@ -1,7 +1,20 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
 import { Product } from '../datatypes/product';
 import { ProductsService } from '../services/products.service';
+import { Observable, of } from 'rxjs';
+
+export const priceRangeValidator = (
+  control: AbstractControl<number>
+): Observable<ValidationErrors | null> => {
+  const inRange = control.value > 1 && control.value < 10000;
+  return of(inRange ? null : { outOfRange: true });
+};
 
 @Component({
   selector: 'app-product-create',
@@ -18,25 +31,13 @@ export class ProductCreateComponent {
 
   productForm = this.formBuilder.group({
     name: ['', Validators.required],
-    price: ['', Validators.required],
+    price: ['', Validators.required, priceRangeValidator],
     info: this.formBuilder.group({
       category: [''],
       description: [''],
       image: [''],
     }),
   });
-
-  // productForm = new FormGroup({
-  //   name: new FormControl('', { nonNullable: true }),
-  //   price: new FormControl<number | undefined>(undefined, {
-  //     nonNullable: true,
-  //   }),
-  //   info: new FormGroup({
-  //     category: new FormControl(''),
-  //     description: new FormControl(''),
-  //     image: new FormControl(''),
-  //   }),
-  // });
 
   get name() {
     return this.productForm!.controls.name;

@@ -6,6 +6,9 @@
     <input id="name" formControlName="name" required />
     <label for="price">Price</label>
     <input type="number" id="price" formControlName="price" required />
+    <span *ngIf="price.touched && price.hasError('outOfRange')">
+      The price is out of range!
+    </span>
 
     <form formGroupName="info">
       <h2>Product Info</h2>
