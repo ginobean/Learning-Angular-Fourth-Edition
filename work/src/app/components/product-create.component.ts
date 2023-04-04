@@ -1,10 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Product } from '../datatypes/product';
 import { ProductsService } from '../services/products.service';
 
