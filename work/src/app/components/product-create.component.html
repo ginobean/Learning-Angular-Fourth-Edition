@@ -1,15 +1,12 @@
 <p>product-create works!</p>
 
-<div>
-  <label for="name">Name</label>
-  <input id="name" #name />
-</div>
-<div>
-  <label for="price">Price</label>
-  <input type="number" id="price" #price />
-</div>
-<div>
-  <button (click)="createProduct(name.value, price.valueAsNumber)">
-    Create
-  </button>
-</div>
+<form [formGroup]="productForm" (ngSubmit)="createProduct()">
+  <div>
+    <label for="name">Name</label>
+    <input id="name" formControlName="name" />
+    <label for="price">Price</label>
+    <input type="number" id="price" formControlName="price" />
+
+    <button type="submit">Create</button>
+  </div>
+</form>
