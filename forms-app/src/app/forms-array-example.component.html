@@ -7,10 +7,8 @@
     <input id="companyName" type="text" formControlName="companyName" />
   </div>
   <ng-container formArrayName="lessons">
-    <ng-container
-      *ngFor="let lessonForm of lessons.controls; let index = index"
-    >
-      <div [formGroupName]="index">
+    <ng-container *ngFor="let lessonForm of lessons.controls; let i = index">
+      <div [formGroupName]="i">
         <input id="title" type="text" formControlName="title" />
         <input id="level" type="text" formControlName="level" />
       </div>
@@ -19,3 +17,7 @@
 </div>
 
 <button (click)="addLesson()">add</button>
+
+<div>
+  <p>real time data: {{ editForm.value | json }}</p>
+</div>
