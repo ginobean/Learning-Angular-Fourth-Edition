@@ -1,14 +1,20 @@
-<div *ngIf="currentProduct">
+<div *ngIf="product$ | async as product">
   <hr />
   <h2>Product Details</h2>
-  <h3>{{ currentProduct.name }}</h3>
-  <span>{{ currentProduct.price | currency : "USD" }}</span>
+  <h3>{{ product.name }}</h3>
+  <span>{{ product.price | currency : "USD" }}</span>
 
-  <input type="number" placeholder="New price" #price />
-  <button (click)="changePrice(currentProduct, price.valueAsNumber)">
-    Change
-  </button>
-  <div [ngSwitch]="currentProduct.name">
+  <form (ngSubmit)="changePrice(product, price!)">
+    <input
+      type="number"
+      placeholder="New price"
+      name="price"
+      [(ngModel)]="price"
+    />
+    <button type="submit">Change</button>
+  </form>
+
+  <div [ngSwitch]="product.name">
     <p *ngSwitchCase="'Webcam'">Product is used for video</p>
     <p *ngSwitchCase="'Microphone'">Product is used for audio</p>
     <p *ngSwitchDefault>Product is for general use</p>

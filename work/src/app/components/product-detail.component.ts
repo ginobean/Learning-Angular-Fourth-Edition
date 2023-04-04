@@ -20,7 +20,8 @@ import { ProductsService } from '../services/products.service';
 export class ProductDetailComponent implements OnInit {
   product$: Observable<Product> | undefined;
   @Output() bought = new EventEmitter();
-  @ViewChild('price', { static: false }) priceElement: ElementRef | undefined;
+
+  price: number | undefined;
 
   currentProduct: Product | undefined;
 
