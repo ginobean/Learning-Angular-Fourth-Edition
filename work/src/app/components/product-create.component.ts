@@ -1,5 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Product } from '../datatypes/product';
 import { ProductsService } from '../services/products.service';
 
@@ -17,8 +22,8 @@ export class ProductCreateComponent {
   ) {}
 
   productForm = this.formBuilder.group({
-    name: [''],
-    price: [''],
+    name: ['', Validators.required],
+    price: ['', Validators.required],
     info: this.formBuilder.group({
       category: [''],
       description: [''],
