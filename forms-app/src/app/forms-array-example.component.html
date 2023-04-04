@@ -1,0 +1,21 @@
+<p>forms-array-example works!</p>
+
+<h3>Add Course Lessons:</h3>
+<div [formGroup]="editForm">
+  <div>
+    <label for="companyName"> Company Name </label>
+    <input id="companyName" type="text" formControlName="companyName" />
+  </div>
+  <ng-container formArrayName="lessons">
+    <ng-container
+      *ngFor="let lessonForm of lessons.controls; let index = index"
+    >
+      <div [formGroupName]="index">
+        <input id="title" type="text" formControlName="title" />
+        <input id="level" type="text" formControlName="level" />
+      </div>
+    </ng-container>
+  </ng-container>
+</div>
+
+<button (click)="addLesson()">add</button>
