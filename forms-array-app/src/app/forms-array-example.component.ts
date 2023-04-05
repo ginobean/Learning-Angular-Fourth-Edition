@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'app-forms-array-example',
   templateUrl: './forms-array-example.component.html',
@@ -19,11 +21,13 @@ export class FormsArrayExampleComponent implements OnInit {
   showPriceRangeHint = false;
 
   ngOnInit(): void {
-    this.editForm.controls['price'].valueChanges.subscribe((v) => {
-      if (v != null) {
-        this.showPriceRangeHint = v < 1 || v > 10000;
-      }
-    });
+    this.editForm.controls['price'].valueChanges
+      .pipe(untilDestroyed(this))
+      .subscribe((v) => {
+        if (v != null) {
+          this.showPriceRangeHint = v < 1 || v > 10000;
+        }
+      });
   }
 
   get lessons() {
