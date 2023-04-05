@@ -6,6 +6,12 @@
     <label for="companyName"> Company Name </label>
     <input id="companyName" type="text" formControlName="companyName" />
     <br />
+    <label for="price">Price:</label>
+    <input id="price" type="number" formControlName="price" />
+    <span *ngIf="showPriceRangeHint">
+      Price should be between 1 and 10000!!!
+    </span>
+    <br />
     <label for="rowCount">Num Rows:</label>
     <input id="rowCount" type="number" formControlName="rowCount" />
     <p></p>

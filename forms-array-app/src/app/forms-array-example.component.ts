@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -6,16 +6,25 @@ import { FormArray, FormBuilder, Validators } from '@angular/forms';
   templateUrl: './forms-array-example.component.html',
   styleUrls: ['./forms-array-example.component.css'],
 })
-export class FormsArrayExampleComponent {
-  constructor(private fb: FormBuilder) {
-    console.log('typeof editform.controls = ' + typeof this.editForm.controls);
-  }
+export class FormsArrayExampleComponent implements OnInit {
+  constructor(private fb: FormBuilder) {}
 
   editForm = this.fb.group({
     companyName: ['', Validators.required],
+    price: [0],
     rowCount: [0],
     lessons: this.fb.array([]),
   });
+
+  showPriceRangeHint = false;
+
+  ngOnInit(): void {
+    this.editForm.controls['price'].valueChanges.subscribe((v) => {
+      if (v != null) {
+        this.showPriceRangeHint = v < 1 || v > 10000;
+      }
+    });
+  }
 
   get lessons() {
     // this.editForm.controls.
