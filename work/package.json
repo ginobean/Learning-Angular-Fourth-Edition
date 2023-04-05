@@ -11,10 +11,12 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^15.2.5",
+    "@angular/cdk": "^15.2.6",
     "@angular/common": "^15.2.5",
     "@angular/compiler": "^15.2.5",
     "@angular/core": "^15.2.5",
     "@angular/forms": "^15.2.5",
+    "@angular/material": "^15.2.6",
     "@angular/platform-browser": "^15.2.5",
     "@angular/platform-browser-dynamic": "^15.2.5",
     "@angular/router": "^15.2.5",
@@ -35,5 +37,9 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
     "typescript": "~4.8.4"
-  }
+  },
+  "styles": [
+    "/@angular/material/prebuilt-themes/indigo-pink.css",
+    "./src/styles.css"
+  ]
 }
