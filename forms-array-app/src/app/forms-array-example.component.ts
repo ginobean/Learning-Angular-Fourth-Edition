@@ -24,7 +24,7 @@ export class FormsArrayExampleComponent implements OnInit {
     this.editForm.controls['price'].valueChanges
       .pipe(untilDestroyed(this))
       .subscribe((v) => {
-        if (v != null) {
+        if (v !== null) {
           this.showPriceRangeHint = v < 1 || v > 10000;
         }
       });
