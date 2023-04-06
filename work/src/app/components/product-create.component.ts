@@ -1,13 +1,13 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
   ValidationErrors,
   Validators,
 } from '@angular/forms';
+import { Observable, map, of } from 'rxjs';
 import { Product } from '../datatypes/product';
 import { ProductsService } from '../services/products.service';
-import { Observable, of } from 'rxjs';
 
 export const priceRangeValidator = (
   control: AbstractControl<number>
@@ -21,13 +21,29 @@ export const priceRangeValidator = (
   templateUrl: './product-create.component.html',
   styleUrls: ['./product-create.component.css'],
 })
-export class ProductCreateComponent {
+export class ProductCreateComponent implements OnInit {
   @Output() added = new EventEmitter<Product>();
+  products: Product[] = [];
+  products$: Observable<Product[]> | undefined;
 
   constructor(
     private productsService: ProductsService,
     private formBuilder: FormBuilder
   ) {}
+
+  ngOnInit(): void {
+    this.productsService.getProducts().subscribe((products) => {
+      this.products = products;
+    });
+
+    this.products$ = this.name.valueChanges.pipe(
+      map((name) =>
+        this.products.filter((product) =>
+          product.name.toLocaleLowerCase().includes(name!.toLocaleLowerCase())
+        )
+      )
+    );
+  }
 
   productForm = this.formBuilder.group({
     name: ['', Validators.required],
