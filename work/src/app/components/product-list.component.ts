@@ -1,9 +1,11 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Observable, Subject, finalize } from 'rxjs';
 import { Product } from '../datatypes/product';
 import { ProductsService } from '../services/products.service';
 import { ProductDetailComponent } from './product-detail.component';
 
+@UntilDestroy()
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -23,10 +25,15 @@ export class ProductListComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
     this.products$ = this.productsService.getProducts();
-    this.selectedProduct$.subscribe((p) => {
-      this.currentProduct = p;
-      console.log('prod list new selected product = ' + p.name);
-    });
+    this.selectedProduct$
+      .pipe(
+        untilDestroyed(this),
+        finalize(() => console.log('product-list subscription finalized'))
+      )
+      .subscribe((p) => {
+        this.currentProduct = p;
+        console.log('prod list new selected product = ' + p.name);
+      });
   }
 
   onBuy() {

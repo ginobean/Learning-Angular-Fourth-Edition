@@ -5,7 +5,8 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { Observable, map, of } from 'rxjs';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Observable, filter, finalize, map, of } from 'rxjs';
 import { Product } from '../datatypes/product';
 import { ProductsService } from '../services/products.service';
 
@@ -16,6 +17,7 @@ export const priceRangeValidator = (
   return of(inRange ? null : { outOfRange: true });
 };
 
+@UntilDestroy()
 @Component({
   selector: 'app-product-create',
   templateUrl: './product-create.component.html',
@@ -32,11 +34,18 @@ export class ProductCreateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.productsService.getProducts().subscribe((products) => {
-      this.products = products;
-    });
+    this.productsService
+      .getProducts()
+      .pipe(
+        untilDestroyed(this),
+        finalize(() => console.log('product-create subscription was finalized'))
+      )
+      .subscribe((products) => {
+        this.products = products;
+      });
 
     this.products$ = this.name.valueChanges.pipe(
+      filter((name) => name !== null),
       map((name) =>
         this.products.filter((product) =>
           product.name.toLocaleLowerCase().includes(name!.toLocaleLowerCase())
